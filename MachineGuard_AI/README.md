@@ -1,9 +1,9 @@
-# 🚀 MachineGuard AI
+# MachineGuard AI
 ### Predictive Maintenance System for Industrial Machinery using Machine Learning and IBM Watsonx AI
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 MachineGuard AI is an intelligent predictive maintenance application that predicts industrial machine failures using machine learning and IBM Watsonx AI.
 
@@ -13,7 +13,7 @@ If IBM Watsonx AI is unavailable, the system automatically switches to a locally
 
 ---
 
-## 🎯 Problem Statement
+## Problem Statement
 
 **IBM SkillBuild Internship**
 
@@ -35,7 +35,7 @@ The system should identify the failure type and assist industries in reducing ma
 
 ---
 
-# ✨ Features
+# Features
 
 -Predict machine failures
 -IBM Watsonx AI integration
