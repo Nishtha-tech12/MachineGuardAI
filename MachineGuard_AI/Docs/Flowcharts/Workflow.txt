@@ -1,0 +1,40 @@
+Start
+ |
+ ↓
+Load Predictive Maintenance Dataset
+ |
+ ↓
+Data Exploration
+ |
+ ↓
+Data Cleaning
+ |
+ ↓
+Remove Unnecessary Columns
+ |
+ ↓
+Handle Data Leakage
+ |
+ ↓
+Feature Selection
+ |
+ ↓
+Train Machine Learning Models
+ |
+ ↓
+Model Evaluation
+ |
+ ↓
+Save Trained Model
+ |
+ ↓
+Deploy using Stream lit
+ |
+ ↓
+Predict Machine Failure
+ |
+ ↓
+Generate Maintenance Recommendations
+ |
+ ↓
+End

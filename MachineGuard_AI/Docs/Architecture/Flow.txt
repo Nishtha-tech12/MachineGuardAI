@@ -1,0 +1,23 @@
+                    User
+                      |
+                      ↓
+          Stream lit Web Application
+                      |
+                      ↓
+              Prediction API Layer
+                      |
+          ---------------------------
+          |                         |
+          ↓                         ↓
+ IBM Watsonx AI Model       Local Random Forest
+          |                         |
+          ---------Fallback----------
+                      |
+                      ↓
+          Failure Classification
+                      |
+                      ↓
+        Severity & Recommendation Engine
+                      |
+                      ↓
+          Maintenance Action Report

@@ -1,0 +1,13 @@
+streamlit
+pandas
+numpy
+scikit-learn
+joblib
+python-dotenv
+requests
+matplotlib
+seaborn
+ibm-watsonx-ai
+ibm-Machine Learning
+ibm-watson stdio
+IBM Bob
