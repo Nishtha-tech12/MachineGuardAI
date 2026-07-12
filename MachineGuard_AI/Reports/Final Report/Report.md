@@ -1,558 +1,333 @@
-# **MachineGuard AI**
+# MachineGuard AI
+## Predictive Maintenance System Using Machine Learning and IBM Watsonx AI
 
-### Predictive Maintenance System Using Machine Learning and IBM Watsonx AI
+---
 
-
-
-**1. Introduction**
-
-
+# 1. Introduction
 
 Industrial machines are critical components in manufacturing industries. Unexpected machine failures can result in production downtime, increased maintenance costs, and reduced operational efficiency.
 
-
-
-MachineGuard AI is an AI-powered predictive maintenance system that uses machine sensor data to predict possible failures before they occur.
-
-
+**MachineGuard AI** is an AI-powered predictive maintenance system that uses machine sensor data to predict possible failures before they occur.
 
 The system analyzes operational parameters such as temperature, rotational speed, torque, and tool wear to identify machine health conditions and provide maintenance recommendations.
 
-
-
 The project integrates:
 
+- Machine Learning for failure prediction
+- IBM Watsonx AI for cloud-based prediction capability
+- Streamlit for an interactive web interface
+- IBM BOB assistance during development and IBM Cloud integration
 
+---
 
-Machine Learning for failure prediction
+# 2. Problem Statement
 
-IBM Watsonx AI for AI-based prediction capability
+Traditional maintenance approaches mainly depend on two methods.
 
-Streamlit for interactive user interface
+## Reactive Maintenance
 
-IBM BOB (Build Operations Bot) for intelligent operational assistance and project demonstration
+- Maintenance is performed after machine failure.
+- Causes unexpected downtime and production loss.
 
+## Scheduled Maintenance
 
+- Maintenance is performed at fixed intervals.
+- May result in unnecessary maintenance or missed failures.
 
-**2. Problem Statement**
+## Objective
 
+MachineGuard AI aims to develop an intelligent system that can:
 
+- Predict machine failure type.
+- Identify machine health status.
+- Provide preventive maintenance suggestions.
+- Reduce unexpected downtime.
 
-Traditional maintenance approaches mainly depend on:
+---
 
+# 3. Dataset Description
 
+The project uses the **Predictive Maintenance Dataset** from Kaggle containing machine operational information.
 
-1\. Reactive Maintenance
+## Input Features
 
+- Product ID
+- Machine Type
+- Air Temperature
+- Process Temperature
+- Rotational Speed
+- Torque
+- Tool Wear
 
+## Target Variable
 
-Maintenance is performed after machine failure.
+**Failure Type**
 
-Causes unexpected downtime and production loss.
+The target contains six classes:
 
+- No Failure
+- Heat Dissipation Failure
+- Power Failure
+- Overstrain Failure
+- Tool Wear Failure
+- Random Failure
 
+---
 
-2\. Scheduled Maintenance
+# 4. Dataset Statistics
 
+| Property | Value |
+|-----------|-------|
+| Dataset Source | Kaggle Predictive Maintenance Dataset |
+| Total Records | 10,000 |
+| Selected Input Features | 6 |
+| Target Classes | 6 |
+| Problem Type | Multi-Class Classification |
 
+---
 
-Maintenance is performed at fixed intervals.
+# 5. Data Preprocessing and Cleaning
 
-May result in unnecessary maintenance or missed failures.
-
-
-
-**The objective of MachineGuard AI is to develop an intelligent system that:**
-
-
-
-Predicts machine failure type.
-
-Identifies machine health status.
-
-Provides preventive maintenance suggestions.
-
-Reduces unexpected downtime.
-
-
-
-**3. Dataset Description**
-
-
-
-The project uses the Predictive Maintenance Dataset containing machine operational information.
-
-
-
-The dataset includes:
-
-
-
-Input Features:
-
-
-
-Product ID
-
-Machine Type
-
-Air Temperature
-
-Process Temperature
-
-Rotational Speed
-
-Torque
-
-Tool Wear
-
-
-
-Target Variable:
-
-
-
-Failure Type
-
-
-
-The target represents different machine conditions such as:
-
-
-
-No Failure
-
-Heat Dissipation Failure
-
-Power Failure
-
-Overstrain Failure
-
-Tool Wear Failure
-
-Random Failure
-
-
-
-**4. Data Preprocessing and Cleaning**
-
-
-
-Before training the models, the dataset was analyzed and cleaned.
-
-
-
-4.1 Data Cleaning
-
-
+## Data Cleaning
 
 The following preprocessing steps were performed:
 
+- Checked missing values
+- Checked duplicate records
+- Removed unnecessary columns
+- Selected meaningful operational parameters
+- Prepared the dataset for machine learning
 
+## Feature Selection
 
-Checked for missing values.
-
-Checked duplicate records.
-
-Removed unnecessary columns.
-
-Selected meaningful operational parameters.
-
-Prepared the dataset for machine learning.
-
-
-
-4.2 Feature Selection
-
-
-
-The original dataset contained some columns that were not useful for prediction.
-
-
+The original dataset contained columns that were not useful for prediction.
 
 Identifier-based columns were removed because they do not represent machine behavior.
 
+### Final Features
 
+- Machine Type
+- Air Temperature (K)
+- Process Temperature (K)
+- Rotational Speed (RPM)
+- Torque (Nm)
+- Tool Wear (min)
 
-Final selected features:
+---
 
+# 6. Handling Data Leakage
 
-
-Machine Type
-
-Air Temperature \[K]
-
-Process Temperature \[K]
-
-Rotational Speed \[rpm]
-
-Torque \[Nm]
-
-Tool Wear \[min]
-
-
-
-**5. Handling Data Leakage**
-
-
-
-During preprocessing, possible data leakage issues were identified.
-
-
+Possible data leakage issues were identified during preprocessing.
 
 Data leakage occurs when the model receives information during training that would not be available during real-world prediction.
 
-
-
 To prevent this:
 
+- Failure-related information was removed from the input features.
+- Only real-time machine sensor parameters were used.
+- The model was trained using information available before machine failure.
 
+This improves prediction reliability in real-world industrial environments.
 
-Failure-related information was removed from input features.
+---
 
-Only real-time machine sensor parameters were used.
-
-The model was trained using information available before failure occurrence.
-
-
-
-This improves the reliability of predictions in real-world scenarios.
-
-
-
-**6. Machine Learning Models**
-
-
+# 7. Machine Learning Models
 
 MachineGuard AI uses two prediction approaches.
 
+## Model 1 – Random Forest Classifier
 
+The first model is a locally trained **Random Forest Classifier** using Scikit-learn.
 
-Model 1: Random Forest Classifier
+### Purpose
 
+- Local prediction model
+- Offline fallback prediction
+- Reliable multi-class classification
 
+### Advantages
 
-The first model is a local machine learning model trained using Scikit-learn.
+- Handles nonlinear relationships
+- High prediction accuracy
+- Robust against noisy sensor data
+- Fast inference
 
+---
 
+## Model 2 – IBM Watsonx AI Cloud Prediction Service
 
-Purpose:
+The application integrates **IBM Watsonx AI** using IBM Cloud Lite Services.
 
+### Purpose
 
+- Cloud-based prediction
+- IBM Cloud integration
+- Scalable deployment
 
-Provides local prediction capability.
+If IBM Watsonx AI is unavailable, the application automatically switches to the local Random Forest model.
 
-Acts as a fallback model.
+### Prediction Flow
 
-Works even when cloud AI services are unavailable.
-
-
-
-Advantages:
-
-
-
-Handles complex relationships between sensor parameters.
-
-Works well with classification problems.
-
-Provides reliable predictions for machine conditions.
-
-Model 2: IBM Watsonx AI Model
-
-
-
-The second prediction approach uses IBM Watsonx AI services.
-
-
-
-Purpose:
-
-
-
-Provides cloud-based AI prediction.
-
-Demonstrates IBM Cloud integration.
-
-Enables scalable AI deployment.
-
-
-
-The prediction flow:
-
-
-
+```text
 User Input
-
-&#x20;     ↓
-
-IBM Watsonx AI Model
-
-&#x20;     ↓
-
-Failure Prediction
-
-
-
-If unavailable:
-
-
-
-&#x20;     ↓
-
-
-
-Random Forest Local Model
-
-
-
-**7. IBM BOB Integration**
-
-IBM BOB (Build Operations Bot)
-
-
-
-IBM BOB is included as part of the project demonstration to showcase AI-assisted operational workflows.
-
-
-
-The role of IBM BOB in MachineGuard AI:
-
-
-
-Demonstrates AI-based interaction with the predictive maintenance system.
-
-Helps explain project workflow and operational use case.
-
-Represents how AI assistants can support decision-making in industrial environments.
-
-
-
-Through IBM BOB, the project highlights the future possibility of combining predictive analytics with intelligent AI assistants for maintenance operations.
-
-
-
-**8. System Architecture**
-
-
-
-The complete architecture of MachineGuard AI:
-
-
-
-&#x20;               User
-
-&#x20;                 |
-
-&#x20;                 ↓
-
-&#x20;       Streamlit Application
-
-&#x20;                 |
-
-&#x20;                 ↓
-
-&#x20;         Prediction API Layer
-
-&#x20;                 |
-
-&#x20;       ---------------------
-
-&#x20;       |                   |
-
-&#x20;       ↓                   ↓
-
-&#x20;IBM Watsonx AI       Random Forest Model
-
-&#x20;       |                   |
-
-&#x20;       --------Fallback-----
-
-&#x20;                 |
-
-&#x20;                 ↓
-
-&#x20;      Failure Classification
-
-&#x20;                 |
-
-&#x20;                 ↓
-
-&#x20;Severity Detection + Recommendation Engine
-
-&#x20;                 |
-
-&#x20;                 ↓
-
-&#x20;     Maintenance Action Report
-
-
-
-**9. Application Development**
-
-
-
-Technology Stack
-
-Component	       Technology
-
-Programming Language	Python
-
-Frontend	       Streamlit
-
-Machine Learning      Scikit-learn
-
-Model Storage	         Joblib
-
-Cloud AI	     IBM Watsonx AI
-
-AI Assistant	        IBM BOB
-
-
-
-Application Features
-
-
+     |
+     v
+IBM Watsonx AI
+     |
+Prediction
+
+If Cloud Unavailable
+     |
+     v
+Random Forest Model
+```
+
+---
+
+# 8. IBM BOB Assistance
+
+IBM BOB assisted during the project development process by:
+
+- Supporting application development
+- Assisting IBM Watsonx AI integration
+- Helping with debugging and workflow understanding
+- Improving project implementation
+
+IBM BOB acted as an AI development assistant throughout the project lifecycle.
+
+---
+
+# 9. System Architecture
+
+```text
+                User
+                  |
+                  v
+        Streamlit Application
+                  |
+                  v
+          Prediction API Layer
+                  |
+        -------------------------
+        |                       |
+        v                       v
+ IBM Watsonx AI         Random Forest Model
+        |                       |
+        -----------Fallback------
+                  |
+                  v
+      Failure Classification
+                  |
+                  v
+Severity Detection & Recommendation Engine
+                  |
+                  v
+     Maintenance Action Report
+```
+
+---
+
+# 10. Application Development
+
+## Technology Stack
+
+| Component | Technology |
+|-----------|------------|
+| Programming Language | Python |
+| Frontend | Streamlit |
+| Machine Learning | Scikit-learn |
+| Model Storage | Joblib |
+| Cloud AI | IBM Watsonx AI |
+| Development Assistant | IBM BOB |
+
+## Application Features
 
 MachineGuard AI provides:
 
+- User-friendly sensor input interface
+- Machine failure prediction
+- Prediction confidence score
+- Failure severity classification
+- Maintenance recommendations
+- IBM Watsonx AI cloud prediction
+- Local Random Forest fallback prediction
 
+## Project Structure
 
-User-friendly sensor input interface.
+```text
+MachineGuardAI-App/
+│
+├── app.py
+├── api/
+│   └── ibm_predict.py
+├── pages/
+│   └── Predict.py
+├── models/
+│   ├── predictive_model.joblib
+│   └── label_encoder.joblib
+├── recommendations.py
+├── train_local_model.py
+├── requirements.txt
+├── assets/
+├── utils/
+└── data/
+```
 
-Machine failure prediction.
+---
 
-Prediction confidence score.
+# 11. Results and Testing
 
-Failure severity classification.
+## Example 1 – Normal Machine Condition
 
-Maintenance recommendations.
+**Prediction:** No Failure
 
-Cloud AI and local fallback support.
+**Confidence:** 100%
 
+The system correctly identifies normal operating conditions.
 
+---
 
-**10. Results and Testing**
+## Example 2 – Failure Detection
 
+**Prediction:** Overstrain Failure
 
+**Confidence:** 42.2%
 
-Normal Machine Condition
+**Severity:** Critical
 
+### Recommended Actions
 
+- Stop machine operation
+- Reduce mechanical load
+- Inspect machine components
+- Replace damaged tools
 
-Example:
+---
 
+# 12. Conclusion
 
+MachineGuard AI successfully demonstrates an AI-based predictive maintenance solution using Machine Learning and IBM Watsonx AI.
 
-Prediction:
+The application can:
 
+- Analyze machine sensor data
+- Predict possible failures
+- Provide maintenance recommendations
+- Support preventive maintenance
+- Continue prediction through a local fallback model when cloud prediction is unavailable
 
+The combination of Machine Learning, IBM Cloud services, and Streamlit creates an efficient industrial predictive maintenance solution.
 
-No Failure
+---
 
-
-
-Confidence:
-
-
-
-100%
-
-
-
-The system identifies normal operating conditions successfully.
-
-
-
-Failure Detection
-
-
-
-Example:
-
-
-
-Prediction:
-
-
-
-Overstrain Failure
-
-
-
-Confidence:
-
-
-
-42.2%
-
-
-
-Severity:
-
-
-
-Critical
-
-
-
-Recommendation:
-
-
-
-Stop machine operation.
-
-Reduce mechanical load.
-
-Inspect machine components.
-
-Replace damaged tools.
-
-
-
-**11. Conclusion**
-
-
-
-MachineGuard AI successfully demonstrates an AI-based predictive maintenance solution using machine learning and IBM Watsonx AI.
-
-
-
-The system can:
-
-
-
-Analyze machine sensor data.
-
-Predict possible failures.
-
-Provide maintenance recommendations.
-
-Support preventive maintenance decisions.
-
-
-
-The combination of ML models, IBM AI services, and an interactive dashboard makes the system suitable for industrial maintenance applications.
-
-
-
-**12. Future Scope**
-
-
+# 13. Future Scope
 
 Future improvements include:
 
-
-
-Real-time IoT sensor integration.
-
-Live machine monitoring.
-
-Advanced deep learning models.
-
-Automated maintenance scheduling.
-
-Integration with industrial control systems.
-
-
-
+- Real-time IoT sensor integration
+- Live machine monitoring
+- Deep Learning-based predictive models
+- Automated maintenance scheduling
+- Industrial dashboard integration
+- ERP and MES integration
+- Mobile application support
