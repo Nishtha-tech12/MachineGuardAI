@@ -25,7 +25,7 @@ The system should identify the failure type and assist industries in reducing ma
 
 ---
 
-# 🏭 Project Domain
+# Project Domain
 
 **Manufacturing Industry**
 
@@ -208,4 +208,3 @@ The application displays:
 
 ---
 
-## ⭐ If you found this project helpful, consider giving it a Star!
