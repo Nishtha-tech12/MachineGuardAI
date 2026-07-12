@@ -113,7 +113,7 @@ The application provides:
 
 ---
 
-# 🤖 IBM Technologies Used
+# IBM Technologies Used
 
 - IBM Cloud Lite
 - IBM Watsonx AI
