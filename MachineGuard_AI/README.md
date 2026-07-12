@@ -37,13 +37,13 @@ The system should identify the failure type and assist industries in reducing ma
 
 # Features
 
--Predict machine failures
--IBM Watsonx AI integration
--Local Random Forest fallback model
--Prediction confidence score
--Failure severity detection
--Intelligent maintenance recommendations
--Interactive Streamlit dashboard
+- Predict machine failures
+- IBM Watsonx AI integration
+- Local Random Forest fallback model
+- Prediction confidence score
+- Failure severity detection
+- Intelligent maintenance recommendations
+- Interactive Streamlit dashboard
 
 ---
 
