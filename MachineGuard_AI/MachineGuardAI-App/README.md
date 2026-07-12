@@ -137,5 +137,3 @@ IBM BOB assisted in:
 IBM BOB served as an AI development assistant throughout the project lifecycle.
 
 ---
-
-⭐ If you found this project useful, consider giving the repository a star.
